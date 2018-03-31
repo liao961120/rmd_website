@@ -17,5 +17,5 @@ output:
     theme: default
     include:
       after_body: footer.html
-    css: styles.css
+    css: style.css
     js: smooth_scroll.js
