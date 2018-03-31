@@ -1,6 +1,6 @@
-name: "my-website"
+name: "行動力量表"
 navbar:
-  title: "My Website"
+  title: "行動力量表"
   right:
     - text: ""
     - icon: fa-github
@@ -19,4 +19,5 @@ output:
     theme: default
     include:
       after_body: footer.html
-    css: styles.css
+css: styles.css
+js: smooth_scroll.js
