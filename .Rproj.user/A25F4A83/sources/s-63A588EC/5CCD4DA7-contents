@@ -1,0 +1,22 @@
+name: "my-website"
+navbar:
+  title: "My Website"
+  right:
+    - text: ""
+    - icon: fa-github
+      href: "https://github.com/rlads2017G1/communicate.web.source"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Sec1"
+      href: "index.html#section-1"
+    - text: "Sec2"
+      href: "index.html#chi"
+    - text: "About"
+      href: about.html
+output:
+  html_document:
+    theme: default
+    include:
+      after_body: footer.html
+    css: styles.css
