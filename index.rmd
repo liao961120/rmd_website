@@ -3,7 +3,8 @@ title: "行動力"
 ---
 
 <!-- Smooth scroll: conflicts with tabset -->
-<script type="text/javascript" src='smooth_scroll.js'></script>
+
+<script type="text/javascript" src='./smooth_scroll.js'></script>
 
 <!-- Popup Modal-->
 <script type="text/javascript">
@@ -25,7 +26,7 @@ source("bootstrap_fc.R")
 
 ## Section 1
 
-[Link To 第三段 MD](#sec3){.btn .btn-success role="button"}
+[Link To 第三段 MD](#sec3){.btn .btn-success  role="button"}
 
 
 <br>
