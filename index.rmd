@@ -9,7 +9,7 @@ title: "行動力"
 <!-- Popup Modal-->
 <script type="text/javascript">
 $(window).on('load',function(){
-$('#exampleModalLong').modal('show');
+$('#first_modal').modal('show');
 });</script>
 
 ```{r setup, include=FALSE}
