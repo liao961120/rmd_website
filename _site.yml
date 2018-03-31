@@ -1,7 +1,6 @@
 name: "行動力量表"
 navbar:
   title: "行動力量表"
-  type: default
   right:
     - text: ""
     - icon: fa-github
@@ -13,12 +12,10 @@ navbar:
       href: "index.html#section-1"
     - text: "Sec2"
       href: "index.html#chi"
-    - text: "About"
-      href: about.html
 output:
   html_document:
     theme: default
     include:
       after_body: footer.html
-css: styles.css
-js: smooth_scroll.js
+    css: styles.css
+    js: smooth_scroll.js

@@ -1,8 +1,8 @@
 ---
-title: ""
+title: "行動力"
 ---
 
-
+<link rel="stylesheet" href="./style.css">
 <script src="smooth_scroll.js"></script>
 
 <script type="text/javascript">
@@ -31,7 +31,6 @@ source("bootstrap_fc.R")
 <br>
 
 ```{r}
-
 # Button trigger modal
 button_bs("Launch", data_toggle="modal", data_target="#first_modal")
 
@@ -47,14 +46,48 @@ iframe <- HTML('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe8BV2rqj-
 modal(id="psytest", modal_header = "行動力量表", modal_body=iframe)
 ```
 
+
 <br>
+
+```{r}
+button_bs("Launch widget", data_toggle="modal", data_target="#htmlwidget")
+```
+
+<br>
+
+<div id="htmlwidget" class="modal fade" role="dialog" tabindex="-1">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">行動力量表</h4>
+</div>
+<div class="modal-body">
+
+<div class="tab-content">
+```{r}
+library(heatmaply)
+source("./rscript/corr_matrix.R", encoding = "utf-8")
+hm
+```
+</div>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<br><br><br><br><br><br><br>
+
+## 中文{#chi .tabset}
+
 <div class="alert alert-success" role="alert">
 This is success
 </div>
-
-<br><br><br><br><br><br><br><br><br>
-
-## 中文{#chi .tabset}
 
 <br>
 
@@ -68,7 +101,13 @@ This is Tab 2
 
 ## 第三段{#sec3}
 
-[Link](#collapseExample){.btn .btn-info role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"}
+
+<div id="pad">
+```{r}
+button_bs("See Collapse", class="info", data_toggle="collapse", aria_expanded="false", aria_controls="collapseExample", data_target = "#collapseExample")
+```
+</div>
+
 ```{r}
 HTML('
 <div class="collapse" id="collapseExample">

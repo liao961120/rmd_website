@@ -53,7 +53,7 @@ collapse <- function(content, id, color="well") {
 ########### Modal ############
 ## size: modal-lg | modal-sm
 modal <- function(modal_header, modal_body, modal_body2=NULL, id, size=NULL) {
-    modal_size <- paste("modal-dialog ", size, sep="")
+    modal_size <- paste("modal-dialog", size, sep=" ")
     
     # modal
     div(id=id, class="modal fade", role="dialog", tabindex="-1",

@@ -1,0 +1,211 @@
+---
+title: "Analysis Documentation"
+output: 
+    html_document:
+        toc: true
+        number_sections: true
+css: /Users/user/local_depend/style_sheets/style.css
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, comment="")
+library(DiagrammeR)
+```
+
+```{r}
+library(DiagrammeR)
+
+grViz("
+digraph { //directed graph
+      graph [layout = dot]  //layout = dot|neato|twopi|circo|fdp
+      rankdir=TB    // LR: Left to Right
+
+      node [shape = oval,
+      style = filled,
+      color = orange]
+      
+      node [fillcolor = orange1] // Code: input & output data
+      a1 [label = 'data_import_cleaning.R']
+      a2 [label = 'preprocess.R']
+      a3 [label = 'item_analysis.R']
+
+      node [fillcolor = gray, shape = box]  //data
+      d_ori1 [label = '問卷題目.xlsx' fillcolor = YellowGreen]
+      d_ori2 [label = 'psy_test.csv' fillcolor = YellowGreen]
+      d1 [label = 'item.csv' fillcolor = YellowGreen]
+
+      d2 [label = 'psy_test_parsed.rds']
+      d3 [label = 'item_construct.rds']
+      d4 [label = 'psy_test_analy.rds']
+      d5 [label = 'item_construct_conNum.rds']
+      d6 [label = 'psy_test_filtered.rds']
+      
+      node [fillcolor = OrangeRed shape = oval,]  // Code: input data only
+      p1 [label = 'plotting.R']
+      p2 [label = 'corr_matrix.R']
+      p3 [label = 'plotting_descri.R']
+      anova [label = 'anova.R']
+      
+      
+      
+      edge [color = grey, arrowtail = none]
+      d_ori1 -> d1
+      
+      {d1 d_ori2} -> a1
+      a1 -> {d2 d3}
+      
+      {d2 d3} -> a2
+      a2 -> {d4 d5}
+      
+      {d4 d5} -> a3
+      a3 -> d6
+      
+      d4 -> {p1 p2}
+      d5 -> {p1 p2 p3 anova}
+      d6 -> {p1 p2 p3 anova}
+      }")
+```
+
+
+Data
+===============================
+Parent Data
+-------------------------------
+- `psy_test.csv`: Original Data, dowloaded from Google Form Directly
+
+- `item.csv`: Generated from `問卷題目.xlsx` **manually**, contain information about:
+	1. item number(coded for analysis)
+	2. item construct(Ch & Eng)
+	3. item type: whether need **reverse-scoring**
+	4. question number: original item number in Google Form questionaire
+	5. item content: questions in Google Form questionaire
+
+------------------------------------------------------
+
+R script
+================================
+
+## `data_import_cleaning.R`
+- Input
+	1. `psy_test.csv`
+	2. `item.csv`
+
+- Output
+	1. `psy_test_parsed.rds`
+	2. `item_construct.rds`
+
+Map original variable names of `psy_test.csv`(Chinese) to new variable names with `var_info`(output as `item_construct.rds`).
+
+Convert variable names of `psy_test.csv`(Chinese) to English.
+
+Standardize and factorize:
+- **gender**, **grade**, **college**, **department**(categorized as well)
+
+Remove duplicated & NA Rows
+
+---------------------------------
+
+## `preprocess.R`
+
+### Data Inputs & Outputs
+- Input
+	1. `psy_test_parsed.rds`
+	2. `item_construct.rds`
+
+- Output
+	1. `psy_test_analy.rds`
+	2. `item_construct_conNum.rds`
+
+### Description
+**Output:** `psy_test_analy.rds`
+
+- Reverse Scoring
+
+- Calculate **total & construct scores**
+	- Add **total & construct scores** as new variables to psy_test(`psy_test_parsed.rds`)
+
+**Output:** `item_construct_conNum.rds`
+
+- Add **construct-number** as new variable to var_info(`item_construct.rds`)
+	- Form: AT-01
+
+------------------------------------
+
+## `item_analysis.R`
+
+### Data Inputs & Outputs
+- Input
+	1. `psy_test_analy.rds`
+	2. `item_construct_conNum.rds`
+
+- Output
+	1. `psy_test_filtered.rds`
+
+### Description
+`psy_test_f`: Filter out **first grade** & **Fake-good scores over 18($\geqslant 18$)**.
+
+Correlation between constructs & Total score(`construct_cor_mt`)
+
+#### Item Indices(`stats`)
+- Cronbach's Alpha
+	1. All Constucts
+	2. Whole Questionare
+	3. All Items(`item_stats$alpha`)
+		- Alpha of the construct that the item belongs to **with the item itself removed**.
+		- To see whether alpha increased(compared to 1. `item_stats$alpha_ori`) after removal of the item.
+
+- Items' correlations with their constructs(`item_stats$corr`)
+
+- Item, Construct, & Total scores' **mean**, **std**, **skewness**, **Difference in Scores between Upper 27.5% and Lower 27.5% groups**(group defined by total score)
+
+
+## `plotting.R`
+
+### Data Inputs & Outputs
+- Input:
+	1. `psy_test_analy.rds`
+	2. `psy_test_filtered.rds`
+	3. `item_construct_conNum.rds`
+
+### Description
+Visualize **effect of fake-good cutoffs**, **distributions of items**
+
+1. fake-good cutoffs
+	- corr. between Fk & other constructs + total test score
+	- visualized as line chart(x = cutoff score, y = correlation)
+
+2. distributions of items
+	- bar chart: x = score, y = freq
+
+## `corr_matrix.R`
+
+### Data Inputs & Outputs
+- Input:
+	1. `psy_test_analy.rds`
+	2. `psy_test_filtered.rds`
+	3. `item_construct_conNum.rds`
+
+### Description
+Heatmap(interactive) Correlation plot
+
+## `plotting_descri.R`
+
+### Data Inputs & Outputs
+- Input:
+	1. `psy_test_filtered.rds`,
+	2. `item_construct_conNum.rds`
+
+### Description
+Visualize descriptive statistics:
+1. gender ratio(pie)
+2. grade composition(bar)
+3. college composition(bar)
+4. department composition(bar)
+
+
+## `anova.R`
+
+### Data Inputs & Outputs
+- Input:
+	1. `psy_test_filtered.rds`,
+	2. `item_construct_conNum.rds`
+
