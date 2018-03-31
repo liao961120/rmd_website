@@ -2,11 +2,14 @@
 title: "行動力"
 ---
 
+<!-- Smooth scroll: conflicts with tabset -->
+<script type="text/javascript" src='smooth_scroll.js'></script>
+
+<!-- Popup Modal-->
 <script type="text/javascript">
-    $(window).on('load',function(){
-        $('#exampleModalLong').modal('show');
-    });
-</script>
+$(window).on('load',function(){
+$('#exampleModalLong').modal('show');
+});</script>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
