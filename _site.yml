@@ -1,6 +1,7 @@
 name: "行動力量表"
 navbar:
   title: "行動力量表"
+  type: default
   right:
     - text: ""
     - icon: fa-github
