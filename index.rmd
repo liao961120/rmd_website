@@ -4,7 +4,7 @@ title: "行動力"
 
 <!-- Smooth scroll: conflicts with tabset -->
 
-<script type="text/javascript" src='./smooth_scroll.js'></script>
+<!-- <script type="text/javascript" src='./smooth_scroll.js'></script>  -->
 
 <!-- Popup Modal-->
 <script type="text/javascript">
@@ -17,8 +17,12 @@ knitr::opts_chunk$set(
 	echo = FALSE,
 	message = FALSE,
 	warning = FALSE,
-	dev='svg',
-	fig.dim = c(5.5, 3.5)  # (width, height)
+	dev='svg'
+	# fig.dim = c(3.5, 3.5)  # (width, height)
+)
+library(knitr)
+htmlwidgets::sizingPolicy(
+    browser.fill=TRUE
 )
 source("bootstrap_fc.R")
 ```
@@ -28,7 +32,8 @@ source("bootstrap_fc.R")
 
 [Link To 第三段 MD](#sec3){.btn .btn-success  role="button"}
 
-<a onclick="popupCenter('https://docs.google.com/spreadsheets/d/1ufuzTL9VCxdvX1QeFQcMGxYbEMq1ZEWVht3CEDpXBmc/edit?usp=sharing', 'myPop1',400,400);" href="javascript:void(0);">CLICK TO OPEN POPUP</a>
+<!-- Popup New webPage -->
+<a  class="btn btn-primary" role="button"  onclick="popupCenter('https://docs.google.com/spreadsheets/d/1ufuzTL9VCxdvX1QeFQcMGxYbEMq1ZEWVht3CEDpXBmc/edit?usp=sharing', 'myPop1',400,400);" href="javascript:void(0);">CLICK TO OPEN POPUP</a>
 <script>
 function popupCenter(url, title, w, h) {
 var left = (screen.width/2)-(w/2);
@@ -36,6 +41,7 @@ var top = (screen.height/2)-(h/2);
 return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
 }
 </script>
+
 <br>
 
 ```{r}
@@ -119,21 +125,79 @@ This is Tab 2
 ## 第三段{#sec3}
 
 
-<div id="pad">
 ```{r}
-button_bs("See Collapse", class="info", data_toggle="collapse", aria_expanded="false", aria_controls="collapseExample", data_target = "#collapseExample")
-```
-</div>
-
-```{r}
-HTML('
-<div class="collapse" id="collapseExample">
-  <div class="alert alert-info">
-    Collasped Text
-  </div>
-</div>')
+button_bs("Launch collapsed modal", data_toggle="modal", data_target="#modalcol")
 ```
 
+<!-- Collapse in Modal --> 
+
+```{r}
+## trigger collapse button
+btn_col1 <- button_bs("Collapse 1", class="info pad", data_toggle="collapse", aria_expanded="false", aria_controls="collapseExample", data_target = "#collapseExample")
+
+btn_col2 <- button_bs("Collapse 2", class="info pad", data_toggle="collapse", aria_expanded="false", aria_controls="collapseExample", data_target = "#collapseExample2")
+```
+
+
+```{r}
+# collapse content 1
+col1 <- collapse(hm, id="collapseExample", class="collapse.in")
+# collapse content 2
+table <- knitr::kable(iris[1:5,], format="html", align="c")
+col2 <- collapse(HTML(table), id="collapseExample2", class="collapse.in")
+```
+
+```{r}
+modal(modal_header="Collapse in Modal",id="modalcol",
+      modal_body = btn_col1, modal_body2 =col1,
+      modal_body3=btn_col2, modal_body4=col2, size="modal-lg")
+```
+
+## Panel Group
+
+```{r}
+p1 <- panel_sub(col_tar="collapseOne", 
+                id_head="p1",
+                data_parent="#panel-group1",
+                aria_label="headingOne",
+                panel_coll="panel-collapse collapse in",
+                title="Group 1",
+                content="Text1")
+                
+
+p2 <- panel_sub(col_tar="collapseTwo", 
+                id_head="p2",
+                data_parent="#panel-group1",
+                aria_label="headingTwo",
+                title="Group 2",
+                content=HTML(kable(iris[50:52,], format="html", align="c"))
+)
+
+p3 <- panel_sub(col_tar="collapseThree", 
+                id_head="p3",
+                data_parent="#panel-group1",
+                aria_label="headingThree",
+                title="Group 3",
+                content=hm)                
+             
+p4 <- panel_sub(col_tar="collapseFour", 
+                id_head="p4",
+                data_parent="#panel-group1",
+                aria_label="headingFour",
+                title="Group 4",
+                content= HTML(kable(iris[40:42,], format="html", align="c"))
+                )
+                
+pan_group <- panel_group(id="panel-group1", p1, p2, p3, p4)
+```
+
+
+```{r}
+button_bs("Launch Modal Panel", data_toggle="modal", data_target="#modalpan")
+
+modal(modal_header="Panel Group in Modal",id="modalpan",
+      modal_body = pan_group, size="modal-lg")
+```
 
 <div class="panel panel-success">
 
@@ -147,3 +211,4 @@ Panel content
   
 </div>
 <br><br><br><br><br><br><br><br><br>
+
