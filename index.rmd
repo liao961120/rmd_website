@@ -28,7 +28,7 @@ source("bootstrap_fc.R")
 
 [Link To 第三段 MD](#sec3){.btn .btn-success  role="button"}
 
-<a onclick="popupCenter('http://www.expert-exchange.com', 'myPop1',700,500);" href="javascript:void(0);">CLICK TO OPEN POPUP</a>
+<a onclick="popupCenter('https://docs.google.com/spreadsheets/d/1ufuzTL9VCxdvX1QeFQcMGxYbEMq1ZEWVht3CEDpXBmc/edit?usp=sharing', 'myPop1',400,400);" href="javascript:void(0);">CLICK TO OPEN POPUP</a>
 <script>
 function popupCenter(url, title, w, h) {
 var left = (screen.width/2)-(w/2);
