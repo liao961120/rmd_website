@@ -12,6 +12,16 @@ $(window).on('load',function(){
 $('#first_modal').modal('show');
 });</script>
 
+<!-- tooltip plugin -->
+<script type="text/javascript">
+$(function () {
+$('[data-toggle="tooltip"]').tooltip()
+})
+$(function () {
+$('[data-toggle="popover"]').popover()
+})
+</script>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
 	echo = FALSE,
@@ -31,7 +41,7 @@ source("bootstrap_fc.R")
 
 ## Section 1
 
-[Link To 第三段 MD](#sec3){.btn .btn-success  role="button"}
+dfjkdjfdjf;ldsafjkdlsa;jflkd;sajfdlsjf;dlasdfjkdjfdjf;ldsafjkdlsa;jflkd;sajfdlsjf;dlas [Link To 第三段 MD](#sec3){.btn .btn-success .pull-right role="button"}
 
 <!-- Popup New webPage -->
 <a  class="btn btn-primary" role="button"  onclick="popupCenter('https://docs.google.com/spreadsheets/d/1ufuzTL9VCxdvX1QeFQcMGxYbEMq1ZEWVht3CEDpXBmc/edit?usp=sharing', 'myPop1',400,400);" href="javascript:void(0);">CLICK TO OPEN POPUP</a>
@@ -45,10 +55,14 @@ return window.open(url, title, 'toolbar=no, location=no, directories=no, status=
 
 <br>
 
+jkdjfdjf;ldsafjkdlsa;jflkd;sajfdlsjf;dlasdfjkdjfdjf;ldsafjkdlsa;jflkd;sajfdlsjf;dlas
 ```{r}
 # Button trigger modal
-button_bs("Launch", data_toggle="modal", data_target="#first_modal")
+button_bs("Launch", data_toggle="modal", data_target="#first_modal", class="primary pull-right")
+```
 
+
+```{r}
 modal_body <- button_bs("Take Test", class = "warning", data_toggle = "modal", data_target = "#psytest")
 
 modal_body2 <- button_bs("Proceed", class = "success pull-right", data_dismiss = "modal")
@@ -154,6 +168,8 @@ modal(modal_header="Collapse in Modal",id="modalcol",
       modal_body3=btn_col2, modal_body4=col2, size="modal-lg")
 ```
 
+
+
 ## Panel Group
 
 ```{r}
@@ -213,5 +229,11 @@ Panel content
 </div>
   
 </div>
+
+```{r}
+HTML("<button type='button' class='btn btn-lg btn-danger' data-toggle='popover' title='Popover title' data-content='And here some amazing content. It's very engaging. Right?'>Click to toggle popover</button>")
+```
+
+
 <br><br><br><br><br><br><br><br><br>
 
