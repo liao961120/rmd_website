@@ -28,7 +28,14 @@ source("bootstrap_fc.R")
 
 [Link To 第三段 MD](#sec3){.btn .btn-success  role="button"}
 
-
+<a onclick="popupCenter('http://www.expert-exchange.com', 'myPop1',700,500);" href="javascript:void(0);">CLICK TO OPEN POPUP</a>
+<script>
+function popupCenter(url, title, w, h) {
+var left = (screen.width/2)-(w/2);
+var top = (screen.height/2)-(h/2);
+return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+}
+</script>
 <br>
 
 ```{r}
@@ -42,9 +49,18 @@ modal_body2 <- button_bs("Proceed", class = "success pull-right", data_dismiss =
 # Modal
 modal(modal_header="Header", id="first_modal", modal_body = modal_body, modal_body2 = modal_body2, size = "modal-sm")
 
-iframe <- HTML('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe8BV2rqj-4n3sKyAkgmO0b01Rzp0mSr2JYHFj_rMfZQARFyw/viewform?embedded=true"  style="position: relative; height: 400px; width: 100%;" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>')
+# iframe for Google Form
+iframe <- HTML('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeE-ke7yhlU3XRDIhw7vRL-mnYLi-jTOYF8Pz4ZLINjV53z2A/viewform?embedded=true" style="position: relative; height: 300px; width: 100%;" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>')
 
-modal(id="psytest", modal_header = "行動力量表", modal_body=iframe)
+viewResult <- button_bs("Result", data_toggle="modal", data_target="#response", class="primary pull-left")
+
+modal(id="psytest", modal_header = "行動力量表", modal_body=iframe, modal_footer=viewResult)
+
+# iframe for response google sheet
+iframe2 <- HTML('<iframe  width="100%" height="200px" frameborder="0" scrolling="no"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQz4zjZfhWBYYRuW2Zhhx-sXvnlrS6vpvcgP0cJPdvsQI-6eKggXmpaWbu4dgbMQgcOHv0NQxL8a_K_/pubhtml?gid=0&amp;single=true&amp;widget=false&amp;chrome=false&amp;headers=false"></iframe>')
+
+# modal: response
+modal(id="response", modal_header = "分數", modal_body=iframe2, size="modal-sm")
 ```
 
 

@@ -52,7 +52,8 @@ collapse <- function(content, id, color="well") {
 ## size: modal-lg | modal-sm
 modal <-
     function(modal_header, id, modal_body,
-             modal_body2 = NULL, size = NULL) {
+             modal_body2 = NULL, modal_footer =NULL, 
+             size = NULL) {
         modal_size <- paste("modal-dialog", size, sep = " ")
         
         # modal
@@ -76,7 +77,8 @@ modal <-
                         modal_body, modal_body2),
                     div(class = "modal-footer",
                         button_bs("Close", class = "default",
-                                  data_dismiss = "modal")
+                                  data_dismiss = "modal"),
+                        modal_footer
                     )
                 )
             )
