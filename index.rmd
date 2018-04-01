@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 	# fig.dim = c(3.5, 3.5)  # (width, height)
 )
 library(knitr)
+library(kableExtra)
 htmlwidgets::sizingPolicy(
     browser.fill=TRUE
 )
@@ -179,13 +180,15 @@ p3 <- panel_sub(col_tar="collapseThree",
                 aria_label="headingThree",
                 title="Group 3",
                 content=hm)                
-             
+
+table <- kable(iris[40:42,], "html", align="c") %>%
+    kable_styling(bootstrap_options = c("striped", "responsive", "condensed"), full_width = F)
 p4 <- panel_sub(col_tar="collapseFour", 
                 id_head="p4",
                 data_parent="#panel-group1",
                 aria_label="headingFour",
                 title="Group 4",
-                content= HTML(kable(iris[40:42,], format="html", align="c"))
+                content= HTML(table)
                 )
                 
 pan_group <- panel_group(id="panel-group1", p1, p2, p3, p4)
