@@ -12,3 +12,9 @@ button.pad {
     margin-right: 1.5px;
     margin-left: 0.2px;
 }
+
+
+div#section-1 {
+    background-color: gray;
+    border-radius: 5%;
+}

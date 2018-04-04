@@ -8,8 +8,6 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Sec1"
-      href: "index.html#section-1"
     - text: "Sec2"
       href: "index.html#chi"
 output:

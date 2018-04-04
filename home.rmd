@@ -1,0 +1,249 @@
+---
+title: "行動力"
+---
+
+<!-- Smooth scroll: conflicts with tabset -->
+
+<!-- <script type="text/javascript" src='./smooth_scroll.js'></script>  -->
+
+<!-- Popup Modal-->
+<!-- <script type="text/javascript"> -->
+<!-- $(window).on('load',function(){ -->
+<!-- $('#first_modal').modal('show'); -->
+<!-- });</script> -->
+
+<!-- tooltip plugin -->
+<script type="text/javascript">
+$(function () {
+$('[data-toggle="tooltip"]').tooltip()
+})
+$(function () {
+$('[data-toggle="popover"]').popover()
+})
+</script>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	dev='svg'
+	# fig.dim = c(3.5, 3.5)  # (width, height)
+)
+library(knitr)
+library(kableExtra)
+htmlwidgets::sizingPolicy(
+    browser.fill=TRUE
+)
+source("bootstrap_fc.R")
+```
+
+
+$$“Most ~ of ~ us ~ have ~ two ~ lives.$$
+$$The ~ life ~ we ~ live, ~ and ~ the ~ unlived ~ life ~ within ~  us.$$ 
+$$Between the two stands Resistance.”$$
+$$- Steven Pressfield$$
+
+![](./cover.png)
+
+<br><br>
+
+## Section 1
+
+dfjkdjfdjf;ldsafjkdlsa;jflkd;sajfdlsjf;dlasdfjkdjfdjf;ldsafjkdlsa;jflkd;sajfdlsjf;dlas [Link To 第三段 MD](#sec3){.btn .btn-success .pull-right role="button"}
+
+<!-- Popup New webPage -->
+<a  class="btn btn-primary" role="button"  onclick="popupCenter('https://docs.google.com/spreadsheets/d/1ufuzTL9VCxdvX1QeFQcMGxYbEMq1ZEWVht3CEDpXBmc/edit?usp=sharing', 'myPop1',400,400);" href="javascript:void(0);">CLICK TO OPEN POPUP</a>
+<script>
+function popupCenter(url, title, w, h) {
+var left = (screen.width/2)-(w/2);
+var top = (screen.height/2)-(h/2);
+return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+}
+</script>
+
+<br>
+
+jkdjfdjf;ldsafjkdlsa;jflkd;sajfdlsjf;dlasdfjkdjfdjf;ldsafjkdlsa;jflkd;sajfdlsjf;dlas
+```{r}
+# Button trigger modal
+button_bs("Launch", data_toggle="modal", data_target="#first_modal", class="primary pull-right")
+```
+
+
+```{r}
+modal_body <- button_bs("Take Test", class = "warning", data_toggle = "modal", data_target = "#psytest")
+
+modal_body2 <- button_bs("Proceed", class = "success pull-right", data_dismiss = "modal")
+
+# Modal
+modal(modal_header="Header", id="first_modal", modal_body = modal_body, modal_body2 = modal_body2, size = "modal-sm")
+
+# iframe for Google Form
+iframe <- HTML('<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeE-ke7yhlU3XRDIhw7vRL-mnYLi-jTOYF8Pz4ZLINjV53z2A/viewform?embedded=true" style="position: relative; height: 300px; width: 100%;" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>')
+
+viewResult <- button_bs("Result", data_toggle="modal", data_target="#response", class="primary pull-left")
+
+modal(id="psytest", modal_header = "行動力量表", modal_body=iframe, modal_footer=viewResult)
+
+# iframe for response google sheet
+iframe2 <- HTML('<iframe  width="100%" height="200px" frameborder="0" scrolling="no"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQz4zjZfhWBYYRuW2Zhhx-sXvnlrS6vpvcgP0cJPdvsQI-6eKggXmpaWbu4dgbMQgcOHv0NQxL8a_K_/pubhtml?gid=0&amp;single=true&amp;widget=false&amp;chrome=false&amp;headers=false"></iframe>')
+
+# modal: response
+modal(id="response", modal_header = "分數", modal_body=iframe2, size="modal-sm")
+```
+
+
+<br>
+
+```{r}
+button_bs("Launch widget", data_toggle="modal", data_target="#htmlwidget")
+```
+
+<br>
+
+<div id="htmlwidget" class="modal fade" role="dialog" tabindex="-1">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">行動力量表</h4>
+</div>
+<div class="modal-body">
+
+<div class="tab-content">
+```{r}
+library(heatmaply)
+source("./rscript/corr_matrix.R", encoding = "utf-8")
+hm
+```
+</div>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<br><br><br><br><br><br><br>
+
+## 中文{#chi .tabset}
+
+<div class="alert alert-success" role="alert">
+This is success
+</div>
+
+<br>
+
+### Tab1
+This is Tab 1
+
+### Tab 2
+This is Tab 2
+
+
+
+## 第三段{#sec3}
+
+
+```{r}
+button_bs("Launch collapsed modal", data_toggle="modal", data_target="#modalcol")
+```
+
+<!-- Collapse in Modal --> 
+
+```{r}
+## trigger collapse button
+btn_col1 <- button_bs("Collapse 1", class="info pad", data_toggle="collapse", aria_expanded="false", aria_controls="collapseExample", data_target = "#collapseExample")
+
+btn_col2 <- button_bs("Collapse 2", class="info pad", data_toggle="collapse", aria_expanded="false", aria_controls="collapseExample", data_target = "#collapseExample2")
+```
+
+
+```{r}
+# collapse content 1
+col1 <- collapse(hm, id="collapseExample", class="collapse.in")
+# collapse content 2
+table <- knitr::kable(iris[1:5,], format="html", align="c")
+col2 <- collapse(HTML(table), id="collapseExample2", class="collapse.in")
+```
+
+```{r}
+modal(modal_header="Collapse in Modal",id="modalcol",
+      modal_body = btn_col1, modal_body2 =col1,
+      modal_body3=btn_col2, modal_body4=col2, size="modal-lg")
+```
+
+
+
+## Panel Group
+
+```{r}
+p1 <- panel_sub(col_tar="collapseOne", 
+                id_head="p1",
+                data_parent="#panel-group1",
+                aria_label="headingOne",
+                panel_coll="panel-collapse collapse in",
+                title="Group 1",
+                content="Text1")
+                
+
+p2 <- panel_sub(col_tar="collapseTwo", 
+                id_head="p2",
+                data_parent="#panel-group1",
+                aria_label="headingTwo",
+                title="Group 2",
+                content=HTML(kable(iris[50:52,], format="html", align="c"))
+)
+
+p3 <- panel_sub(col_tar="collapseThree", 
+                id_head="p3",
+                data_parent="#panel-group1",
+                aria_label="headingThree",
+                title="Group 3",
+                content=hm)                
+
+table <- kable(iris[40:42,], "html", align="c") %>%
+    kable_styling(bootstrap_options = c("striped", "responsive", "condensed"), full_width = F)
+p4 <- panel_sub(col_tar="collapseFour", 
+                id_head="p4",
+                data_parent="#panel-group1",
+                aria_label="headingFour",
+                title="Group 4",
+                content= HTML(table)
+                )
+                
+pan_group <- panel_group(id="panel-group1", p1, p2, p3, p4)
+```
+
+
+```{r}
+button_bs("Launch Modal Panel", data_toggle="modal", data_target="#modalpan")
+
+modal(modal_header="Panel Group in Modal",id="modalpan",
+      modal_body = pan_group, size="modal-lg")
+```
+
+<div class="panel panel-success">
+
+<div class="panel-heading">
+<h3 class="panel-title">Panel title</h3>
+</div>
+
+<div class="panel-body">
+Panel content
+</div>
+  
+</div>
+
+```{r}
+HTML("<button type='button' class='btn btn-lg btn-danger' data-toggle='popover' title='Popover title' data-content='And here some amazing content. It's very engaging. Right?'>Click to toggle popover</button>")
+```
+
+
+<br><br><br><br><br><br><br><br><br>
+
+<div class="bs-callout bs-callout-warning" id="callout-alerts-dismiss-use-button"> <h4>Ensure proper behavior across all devices</h4> <p>Be sure to use the <code>&lt;button&gt;</code> element with the <code>data-dismiss="alert"</code> data attribute.</p> </div>
