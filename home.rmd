@@ -240,9 +240,9 @@ Panel content
 </div>
 
 ```{r}
-HTML("<button type='button' class='btn btn-lg btn-danger' data-toggle='popover' title='Popover title' data-content='And here some amazing content. It's very engaging. Right?'>Click to toggle popover</button>")
+HTML("<button type='button' class='btn btn-lg btn-danger' data-toggle='popover' data-content='And here some amazing content. It's very engaging. Right?'>Click to toggle popover</button>")
 ```
-
+<!-- title='Popover title' -->
 
 <br><br><br><br><br><br><br><br><br>
 
