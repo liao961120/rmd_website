@@ -243,6 +243,11 @@ Panel content
 HTML("<button type='button' class='btn btn-lg btn-danger' data-toggle='popover' data-content='And here some amazing content. It's very engaging. Right?'>Click to toggle popover</button>")
 ```
 <!-- title='Popover title' -->
+<br><br>
+<style>a.red_link {color: red}</style>
+```{r}
+HTML("fjaskfjalskj<a class='red_link' data-placement='bottom'  data-toggle='popover' data-content='And here some amazing content. It's very engaging. Right?'>Click to toggle popover</a>sadsd")
+```
 
 <br><br><br><br><br><br><br><br><br>
 
