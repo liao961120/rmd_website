@@ -9,7 +9,7 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Sec2"
-      href: "index.html#chi"
+      href: "home.html"
 output:
   html_document:
     theme: default
